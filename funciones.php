@@ -28,6 +28,6 @@ function obtener_todos_registro(){
     $resultado = $stmt->fetchAll();
     return $stmt->rowCount();
     }
-}
+
 
 ?>

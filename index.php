@@ -14,9 +14,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
-    <link rel="stylesheet" href="js/jquery.dataTables.min.js">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
@@ -46,7 +45,7 @@
         <br>
 
         <div class="table-responsive">
-            <table id="datos-usuarios" class="table table-bordered table-striped">
+            <table id="datos_usuarios" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -111,15 +110,36 @@
   </div>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yEx1q6GSYGHK7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 
-    <script src="js/jquery.dataTables.min.js"></script>
-
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js">
+    </script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-   
+   <script type="text/javascript">
+       $(document).ready(function(){
+           $('#datos_usuarios').DataTable({
+               "processing":true,
+               "serverSide":true,
+               "order":[],
+               "ajax":  {
+                   url: "obtener_registros.php",
+                   type: "POST"
+               },
+               "columnsDefs":[
+                   {
+                  "targets" :[0, 3, 4],
+                  "orderable":false,
+                },
+               ]
+           });
+      
+       
+        });
+   </script>
+
   </body>
 </html>
