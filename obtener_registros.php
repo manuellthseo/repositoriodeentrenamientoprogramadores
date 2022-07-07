@@ -5,12 +5,12 @@ include("funciones.php");
 
 $query = "";
 $salida = array();
-$query = "SELECT * FROM usuarios";
+$query = "SELECT * FROM usuarios ";
 
 if (isset($_POST["search"]["value"])) {
-    $query .= 'WHERE nombre LIKE "%' . $_POST["search"]["value"] . '%"';
+    $query .= 'WHERE nombre LIKE "%' . $_POST["search"]["value"] . '%" ';
 
-    $query .= 'OR apellidos LIKE "%' . $_POST["search"]["value"] . '%"';
+    $query .= 'OR apellidos LIKE "%' . $_POST["search"]["value"] . '%" ';
 }
 
 if (isset($_POST["order"])) {
@@ -18,7 +18,7 @@ if (isset($_POST["order"])) {
     $_POST['order']['0']['dir'] . '';
 
     }else{
-        $query .= 'ORDER BY id DESC'; 
+        $query .= 'ORDER BY id DESC '; 
     }
 
     if ($_POST["length"] != -1){
@@ -51,7 +51,7 @@ if (isset($_POST["order"])) {
          btn-warning btn-xs editar">Editar</button>';
          $sub_array[] = 'button type"button" name="editar" id="'.$fila["id"].'" class"btn 
          btn-warning btn-xs borrar">Borrar</button>';
-         $datos = $sub_array;
+         $datos[] = $sub_array;
     }
 
     $salida = array(

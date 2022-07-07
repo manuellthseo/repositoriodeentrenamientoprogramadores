@@ -117,10 +117,18 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
    <script type="text/javascript">
        $(document).ready(function(){
+             $("#bontonCrear").click(function(){
+                 $("#formulario")[0].reset();
+                 $("#modal-tittle").text("Crear Usuario");
+                 $("#action").val("Crear");
+                 $("#operacion").val("Crear");
+                 $("#imagen_subida").html("");
+             });
+
            $('#datos_usuarios').DataTable({
                "processing":true,
                "serverSide":true,
@@ -136,9 +144,45 @@
                 },
                ]
            });
-      
-       
         });
+
+        $(document).on('submit', '#formulario', function(){event.preventDefault();
+            var nombres = $("#nombre").val();
+            var apellidos = $("#apellido").val();
+            var telefono = $("#telefono").val();
+            var email = $("#email").val();
+            var extension = $("#imagen_usuario").val().split('.').pop().toLowerCase;
+
+            if(extension != ''){
+                if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+                alert("Formato de imagen invalido");
+                $("#imagen_usuario").va('');
+                return false;
+            }
+
+            if(nombre != '' && apellidos != '' && email != ''){
+                $.ajax({
+                   url:"crear.php",
+                   method: "POST",
+                   data:new FormData(this),
+                   contentType: false,
+                   processData: false,
+                   success:function(data){
+                    {
+                     alert(data);
+                     $('#formulario')[0].reset();
+                     $('#modalUsuario').modal.hide();
+                     dataTable.ajax.reload();
+
+                    }
+
+                   }
+                });
+            } else{
+                alert("Algunos campos son obligatorios");
+            }
+        });
+
    </script>
 
   </body>
