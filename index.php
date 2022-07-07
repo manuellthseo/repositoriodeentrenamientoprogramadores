@@ -121,9 +121,9 @@
 
    <script type="text/javascript">
        $(document).ready(function(){
-             $("#bontonCrear").click(function(){
+             $("#botonCrear").click(function(){
                  $("#formulario")[0].reset();
-                 $("#modal-tittle").text("Crear Usuario");
+                 $("#modal-title").text("Crear Usuario");
                  $("#action").val("Crear");
                  $("#operacion").val("Crear");
                  $("#imagen_subida").html("");
@@ -148,18 +148,18 @@
 
         $(document).on('submit', '#formulario', function(){event.preventDefault();
             var nombres = $("#nombre").val();
-            var apellidos = $("#apellido").val();
+            var apellidos = $("#apellidos").val();
             var telefono = $("#telefono").val();
             var email = $("#email").val();
-            var extension = $("#imagen_usuario").val().split('.').pop().toLowerCase;
+            var extension = $("#imagen_usuario").val().split('.').pop().toLowerCase();
 
             if(extension != ''){
-                if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+                if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1){
                 alert("Formato de imagen invalido");
-                $("#imagen_usuario").va('');
+                $("#imagen_usuario").val('');
                 return false;
+                }
             }
-
             if(nombre != '' && apellidos != '' && email != ''){
                 $.ajax({
                    url:"crear.php",
@@ -173,15 +173,13 @@
                      $('#formulario')[0].reset();
                      $('#modalUsuario').modal.hide();
                      dataTable.ajax.reload();
-
                     }
-
                    }
                 });
             } else{
                 alert("Algunos campos son obligatorios");
-            }
-        });
+          }
+       });
 
    </script>
 
